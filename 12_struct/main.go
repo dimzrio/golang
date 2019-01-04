@@ -34,6 +34,10 @@ func main() {
 		merried: true}
 
 	fmt.Println(person1)
+
+	// set name
+	person1.name = "Dimas Rio"
+
 	fmt.Println(person1.names())
 	fmt.Println(person1.merrieds())
 	fmt.Println(person1.ages())
