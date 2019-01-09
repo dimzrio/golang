@@ -5,8 +5,23 @@ import (
 	"strings"
 )
 
+/*
+Note:
+Func name with Capitalize is Public --> accessable from another package
+Func name with Lowercase is Private --> can't accessable from another package
+*/
+
+// Private
+func info() string {
+	return "This is an strutils package"
+}
+
+//GetInfo fuct
+func GetInfo() string {
+	return info()
+}
+
 // ReverseConcate func
-// Need args string
 func ReverseConcate(str string) string {
 	var index int
 	var result string
@@ -22,7 +37,6 @@ func ReverseConcate(str string) string {
 }
 
 // ReverseBuffer func
-// Need args string
 func ReverseBuffer(str string) string {
 	var result bytes.Buffer
 
@@ -37,7 +51,6 @@ func ReverseBuffer(str string) string {
 }
 
 // ReverseJoin func
-// Need args string
 func ReverseJoin(str string) string {
 	var result []string
 	split := strings.Split(str, "")

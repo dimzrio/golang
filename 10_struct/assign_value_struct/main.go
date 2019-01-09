@@ -4,7 +4,7 @@ import "fmt"
 
 // Player structure
 type Player struct {
-	Name, Club string // First char must be Capitalize
+	Name, Club string // First char must be Capitalize for Public, accessable from another package
 	Age        int
 }
 
