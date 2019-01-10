@@ -10,4 +10,6 @@ func main() {
 	for i := 0; i <= 5; i++ {
 		defer fmt.Println(i) // with defer stdout reverse
 	}
+
+	// os.exit(0) --> if using os.exit, defer not execute
 }
