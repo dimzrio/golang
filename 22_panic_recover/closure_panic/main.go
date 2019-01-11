@@ -13,14 +13,15 @@ func main() {
 
 	for i := 0; true; i++ {
 		input := bufio.NewReader(os.Stdin)
-		fmt.Println("Input Player? ")
+		fmt.Print("Input Player? ")
 		name, _ := input.ReadString('\n')
 
-		validate, err := func(name string) (bool, error) {
-			if strings.TrimSpace(name) == " " {
-				return false, errors.New("Input nil")
+		name, err := func(name string) (string, error) {
+			n := strings.TrimSpace(name)
+			if n == "" {
+				return n, errors.New("Input nil")
 			}
-			return true, nil
+			return n, nil
 		}(name)
 
 		if err != nil {
@@ -34,13 +35,12 @@ func main() {
 			panic(err.Error())
 		}
 
-		if validate {
-			if name == "end" {
-				break
-			}
-			PlayerFootball = append(PlayerFootball, name)
-			fmt.Println("Append", name, "Successfully")
+		if name == "end" {
+			break
 		}
+		PlayerFootball = append(PlayerFootball, name)
+		fmt.Println("Append", name, "Successfully")
+
 	}
 
 	fmt.Println("Data Player: ", PlayerFootball)
