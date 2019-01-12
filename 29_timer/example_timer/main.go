@@ -25,10 +25,10 @@ func main() {
 
 	var input string
 
+	go timer(timeout, ch)
 	go watcherTimeout(ch)
 
 	for i := 1; i <= 3; i++ {
-		go timer(timeout, ch)
 
 		fmt.Print("[?] What is 7 + 3? ")
 		fmt.Scan(&input)
