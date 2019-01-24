@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -24,28 +23,15 @@ func connect() (*sql.DB, error) {
 	return db, nil
 }
 
-func querySQL(db *sql.DB) ([]dimzrioRow, error) {
-	row, err := db.Query("select * from dimzrio")
-	defer row.Close()
+func insertSQL(db *sql.DB, id int, name, data string) error {
+	_, err := db.Exec("insert into dimzrio value (?,?,?)", id, name, data)
 
 	if err != nil {
-		return nil, err
+		log.Fatalf("Failed to insert: %v\n", err)
+		return err
 	}
 
-	var result []dimzrioRow
-
-	for row.Next() {
-		var each = dimzrioRow{}
-		err = row.Scan(&each.id, &each.name, &each.data)
-
-		if err != nil {
-			return nil, err
-		}
-
-		result = append(result, each)
-	}
-
-	return result, nil
+	return nil
 }
 
 func main() {
@@ -63,13 +49,17 @@ func main() {
 	}
 	log.Println("Connecting to db successfully..")
 
-	rowData, err := querySQL(db)
+	// Insert
+	var id = 4
+	var name = "hana"
+	var data = "hello hana"
+
+	err = insertSQL(db, id, name, data)
 
 	if err != nil {
 		log.Println(err)
 	}
 
-	for _, each := range rowData {
-		fmt.Printf("ID: %d\tName: %s\tData: %s\n", each.id, each.name, each.data)
-	}
+	log.Println("Insert successfully...")
+
 }

@@ -24,25 +24,18 @@ func connect() (*sql.DB, error) {
 	return db, nil
 }
 
-func querySQL(db *sql.DB) ([]dimzrioRow, error) {
-	row, err := db.Query("select * from dimzrio")
-	defer row.Close()
+func querySQL(db *sql.DB, id int) (dimzrioRow, error) {
+	smt, err := db.Prepare("select * from dimzrio where id=?")
 
 	if err != nil {
-		return nil, err
+		log.Fatalf("Failed to select row: %v\n", err)
 	}
 
-	var result []dimzrioRow
+	var result dimzrioRow
+	err = smt.QueryRow(id).Scan(&result.id, &result.name, &result.data)
 
-	for row.Next() {
-		var each = dimzrioRow{}
-		err = row.Scan(&each.id, &each.name, &each.data)
-
-		if err != nil {
-			return nil, err
-		}
-
-		result = append(result, each)
+	if err != nil {
+		log.Fatalf("Failed to get data: %v\n", err)
 	}
 
 	return result, nil
@@ -63,13 +56,22 @@ func main() {
 	}
 	log.Println("Connecting to db successfully..")
 
-	rowData, err := querySQL(db)
+	id := 3
+	rowData, err := querySQL(db, id)
 
 	if err != nil {
 		log.Println(err)
 	}
 
-	for _, each := range rowData {
-		fmt.Printf("ID: %d\tName: %s\tData: %s\n", each.id, each.name, each.data)
+	fmt.Printf("ID: %d\tName: %s\tData: %s\n", rowData.id, rowData.name, rowData.data)
+
+	id = 2
+	rowData, err = querySQL(db, id)
+
+	if err != nil {
+		log.Println(err)
 	}
+
+	fmt.Printf("ID: %d\tName: %s\tData: %s\n", rowData.id, rowData.name, rowData.data)
+
 }
