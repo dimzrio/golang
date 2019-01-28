@@ -5,6 +5,9 @@ import (
 	"sync"
 )
 
+// detect race conditions
+// go run -race main.go
+
 var x = 0
 
 func main() {
@@ -26,7 +29,7 @@ func main() {
 	var solution sync.WaitGroup
 	var mutex sync.Mutex
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 100; i++ {
 		solution.Add(1)
 
 		go func(solution *sync.WaitGroup, m *sync.Mutex) {
