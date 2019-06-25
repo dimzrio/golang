@@ -1,0 +1,8 @@
+appName: fseventd
+appVersion: v1.0.0
+path:
+  srcPath: /data/testing/
+  dstPath: /static/testing/
+host:
+  - 203.190.243.15:10101
+  - 203.190.243.15:10101
