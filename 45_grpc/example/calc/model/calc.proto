@@ -1,0 +1,17 @@
+syntax="proto3";
+
+package model;
+option go_package="model";
+
+message RequestSum {
+    int32 x = 1;
+    int32 y = 2;
+}
+
+message ResponseSum{
+    int32 result = 1;
+}
+
+service CalcSum {
+    rpc Sum (RequestSum) returns (ResponseSum);
+}

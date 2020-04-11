@@ -1,0 +1,16 @@
+syntax="proto3";
+
+package model;
+option go_package="model";
+
+message sumReq{
+    int64 number = 1;
+}
+
+message sumResp{
+    int64 result = 1;
+}
+
+service sumNumber {
+    rpc sumAll (stream sumReq) returns (sumResp){};
+}

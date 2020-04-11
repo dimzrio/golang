@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  mongodb:
+    build:
+      context: .
+    ports:
+      - "27017:27017"
+    command: --auth
+    volumes:
+      - ./db:/data/db
+      - ./script/:/script/
+      - ./setup/:/docker-entrypoint-initdb.d/
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+    env_file:
+      - .env
+    restart: always

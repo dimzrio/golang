@@ -1,0 +1,21 @@
+syntax="proto3";
+
+package model;
+option go_package = "model";
+
+message Name{
+    string firstname = 1;
+    string lastname = 2;
+}
+
+message requestName{
+    Name name = 1;
+}
+
+message responseName{
+    string result = 1;
+}
+
+service NameService{
+    rpc SayHello(requestName) returns (responseName);
+}

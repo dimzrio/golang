@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package model;
+option go_package="model";
+
+message exponentReq {
+    int32 number = 1;
+}
+
+message exponentResp {
+    int32 result = 1;
+    int32 number = 2;
+}
+
+service exponent2 {
+    rpc getExponent (stream exponentReq) returns (stream exponentResp){};
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package model;
+option go_package="model";
+
+message primeReq {
+    int64 number = 1;
+}
+
+message primeResp {
+    int64 result = 1;
+}
+
+service primeService {
+    rpc primeDecompotion (primeReq) returns (stream primeResp){};
+}

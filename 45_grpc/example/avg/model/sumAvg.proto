@@ -1,0 +1,16 @@
+syntax="proto3";
+
+package model;
+option go_package="model";
+
+message avgReq {
+    int64 number = 1;
+}
+
+message avgResp {
+    float result = 1;
+}
+
+service avgService {
+    rpc sumAvg (stream avgReq) returns (avgResp){};
+}

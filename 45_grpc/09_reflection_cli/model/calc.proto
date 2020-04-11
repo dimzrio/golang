@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package model;
+option go_package="model";
+
+message calcReq{
+    double firstNumber = 1;
+    double seconNumber = 2;
+}
+
+message calcResp {
+    double result = 1;
+}
+
+service CalcatorService {
+    rpc AdditionService (calcReq) returns (calcResp);
+    rpc SubtractionService (calcReq) returns (calcResp);
+    rpc MultiplicationService (calcReq) returns (calcResp);
+    rpc DivisionService (calcReq) returns (calcResp);
+}

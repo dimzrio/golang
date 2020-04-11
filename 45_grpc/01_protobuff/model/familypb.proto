@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package model;
+
+message JobDesc{
+    string company = 1;
+    string possition = 2;
+}
+
+message Family {
+    int32 id = 1;
+    string name = 2;
+    string gender = 3;
+    int32 age = 4;
+    string status = 5;
+    JobDesc job = 6;
+}

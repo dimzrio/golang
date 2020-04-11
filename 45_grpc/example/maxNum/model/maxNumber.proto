@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package model;
+option go_package="model";
+
+message maxNumReq {
+    int32 number = 1;
+}
+
+message maxNumResp {
+    int32 result = 1;
+}
+
+service maxNumber {
+    rpc getMax (stream maxNumReq) returns (stream maxNumResp){};
+}

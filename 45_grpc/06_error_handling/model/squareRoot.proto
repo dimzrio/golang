@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package model;
+option go_package="model";
+
+message squareReq{
+    int32 number = 1;
+}
+
+message squareResp{
+    double result = 1;
+}
+
+service squareService {
+    rpc squareRoot (squareReq) returns (squareResp){};
+}

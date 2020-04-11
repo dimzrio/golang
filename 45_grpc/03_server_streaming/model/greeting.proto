@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package model;
+option go_package="model";
+
+message greetingReq {
+    string name = 1;
+}
+
+message greetingResp {
+    string result = 1;
+}
+
+service nameService {
+    rpc DetailsPerson (greetingReq) returns (stream greetingResp){};
+}

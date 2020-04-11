@@ -1,0 +1,59 @@
+syntax="proto3";
+
+package model;
+option go_package = "model";
+
+message Database {
+    string id = 1;
+    string author = 2;
+    string appsname = 3;
+    string language = 4;
+}
+
+message CreateReq {
+    Database db = 1;
+}
+
+message CreateResp {
+    Database db = 1;
+}
+
+message ReadReq {
+    string id = 1;
+}
+
+message ReadResp {
+    Database db = 1;
+}
+
+message UpdateReq {
+    Database db = 1;
+}
+
+message UpdateResp {
+    Database db = 1;
+}
+
+message DeleteReq {
+    string id = 1;
+}
+
+message DeleteResp {
+    Database db = 1;
+}
+
+message ListReq {
+    
+}
+
+message ListResp {
+    Database db = 1;
+}
+
+service DBService {
+    rpc Create (CreateReq) returns (CreateResp);
+    rpc Read (ReadReq) returns (ReadResp);
+    rpc Update (UpdateReq) returns (UpdateResp);
+    rpc Delete (DeleteReq) returns (DeleteResp);
+    rpc List (ListReq) returns (stream ListResp);
+}
